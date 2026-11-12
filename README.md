@@ -14,11 +14,12 @@ python -m pytest tests -v -s
 
 - tests/conftest.py: 브라우저 생성·종료를 관리하는 공통 fixture
 - tests/test_home.py: 홈페이지 제목 검증
-- tests/test_product_search.py: 상품 검색 결과 화면 및 상품 표시 검증
+- tests/test_product_search.py: 공통 검색 함수 및 상품 검색 테스트
 
 ## 현재 테스트 상태
 - 홈페이지 제목 검증: PASS
-- 상품 검색 결과 화면 및 상품 표시 검증: PASS
+- 상품 검색 결과 화면 및 상품 표시 검증: PASS(dress,top,jeans)
+- 검색 결과 없음 검증: PASS (xyz123, 상품 수 0개)
 
 ## 검증 내용
 
@@ -55,3 +56,11 @@ python -m pytest tests -v -s
 
 ## 테스트 실행 구조
 pytest fixture를 사용하여 각 테스트 실행 전에 브라우저를 생성하고, 테스트 종료 후 브라우저를 종료합니다.
+
+## 코드 개선
+
+- 반복되는 페이지 접속, 검색어 입력, 검색 버튼 클릭,
+  검색 결과 제목 대기를 `search_products(driver, keyword)` 함수로 분리
+- 검색 결과가 있는 테스트와 없는 테스트에서 공통 함수 재사용
+- 상품 수 검증은 각 테스트에 유지
+- 리팩터링 후 검색 테스트 4개 PASS 확인
